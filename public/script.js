@@ -63,3 +63,44 @@ auth.onAuthStateChanged(user => {
     window.location.href = "index.html";
   }
 });
+
+auth.onAuthStateChanged(user => {
+  if (!user) {
+    window.location.href = "index.html";
+  } else {
+    document.getElementById("userName").innerText =
+      "Welcome, " + user.displayName;
+
+    loadProfile(user.uid);
+    loadEvents();
+  }
+});
+
+function loadProfile(uid) {
+  db.collection("users").doc(uid).get().then(doc => {
+    if (doc.exists) {
+      const data = doc.data();
+      document.getElementById("profile").innerHTML = `
+        <p><b>Skills:</b> ${data.skills.join(", ")}</p>
+        <p><b>Interests:</b> ${data.interests.join(", ")}</p>
+      `;
+    }
+  });
+}
+
+function loadEvents() {
+  db.collection("events").get().then(snapshot => {
+    let html = "";
+    snapshot.forEach(doc => {
+      const e = doc.data();
+      html += `
+        <div class="event">
+          <h4>${e.name}</h4>
+          <p>Club: ${e.club}</p>
+          <p>Date: ${e.date}</p>
+        </div>
+      `;
+    });
+    document.getElementById("events").innerHTML = html;
+  });
+}
