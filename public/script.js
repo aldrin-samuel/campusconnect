@@ -19,16 +19,21 @@ function login() {
 
 // ---------- AUTH CHECK ----------
 auth.onAuthStateChanged(user => {
-  if (document.body.id === "dashboard") {
-    if (!user) {
-      window.location.href = "index.html";
-    } else {
-      document.getElementById("userName").innerText = "Welcome, " + user.displayName;
-      loadProfile(user.uid);
-      loadEvents();
+  if (!user) {
+    window.location.href = "index.html";
+  } else {
+    if (document.getElementById("userName")) {
+      document.getElementById("userName").innerText =
+        "Welcome, " + user.displayName;
     }
+
+    createSampleEvents();
+    loadEvents();
+    createSampleUsers();
+
   }
 });
+
 
 // ---------- PROFILE SAVE ----------
 function saveProfile() {
@@ -131,5 +136,60 @@ function goToEvents() { window.location.href = "events.html"; }
 function logout() {
   auth.signOut().then(() => {
     window.location.href = "index.html";
+  });
+}
+function createSampleEvents() {
+  db.collection("events").get().then(snapshot => {
+    if (!snapshot.empty) return;
+
+    const samples = [
+      { name: "AI Hackathon", club: "Tech Club", date: "2026-02-10" },
+      { name: "Web Dev Bootcamp", club: "Coding Club", date: "2026-02-15" },
+      { name: "Robotics Meetup", club: "Robotics Club", date: "2026-02-20" }
+    ];
+
+    samples.forEach(e => db.collection("events").add(e));
+  });
+}
+function createSampleUsers() {
+  const samples = [
+    { name: "Aarav", skills: ["java", "web"], interests: ["hackathons"] },
+    { name: "Meera", skills: ["python", "ai"], interests: ["ai"] },
+    { name: "Rahul", skills: ["react", "node"], interests: ["web3"] }
+  ];
+
+  samples.forEach((u, i) => {
+    db.collection("users").doc("sample" + i).set(u);
+  });
+}
+function findMatches() {
+  const mySkills = [...document.querySelectorAll("input[type=checkbox]:checked")]
+    .map(i => i.value);
+
+  db.collection("users").get().then(snapshot => {
+    let html = "";
+
+    snapshot.forEach(doc => {
+      const u = doc.data();
+      if (!u.skills) return;
+
+      let score = 0;
+      mySkills.forEach(s => {
+        if (u.skills.includes(s)) score += 1;
+      });
+
+      if (score > 0) {
+        html += `
+          <div class="match">
+            <b>${u.name}</b><br>
+            Skills: ${u.skills.join(", ")}<br>
+            Score: ${score}
+          </div>
+        `;
+      }
+    });
+
+    document.getElementById("matches").innerHTML =
+      html || "No matches yet.";
   });
 }

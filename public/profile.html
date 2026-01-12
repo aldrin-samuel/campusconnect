@@ -5,50 +5,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
+<h2>Create Profile</h2>
 
-<h2>Create Your Profile</h2>
+<h4>Skills</h4>
+<label><input type="checkbox" value="java"> Java</label>
+<label><input type="checkbox" value="python"> Python</label>
+<label><input type="checkbox" value="c++"> C++</label>
+<label><input type="checkbox" value="html"> HTML</label>
+<label><input type="checkbox" value="css"> CSS</label>
+<label><input type="checkbox" value="javascript"> JavaScript</label>
+<label><input type="checkbox" value="react"> React</label>
+<label><input type="checkbox" value="node"> Node</label>
 
-<h3>Skills</h3>
-<div id="skills">
-  <label><input type="checkbox" value="java"> Java</label>
-  <label><input type="checkbox" value="python"> Python</label>
-  <label><input type="checkbox" value="c++"> C++</label>
-  <label><input type="checkbox" value="c"> C</label>
-  <label><input type="checkbox" value="c#"> C#</label>
-  <label><input type="checkbox" value=".net"> .NET</label>
-  <label><input type="checkbox" value="html"> HTML</label>
-  <label><input type="checkbox" value="css"> CSS</label>
-  <label><input type="checkbox" value="javascript"> JavaScript</label>
-  <label><input type="checkbox" value="react"> React</label>
-  <label><input type="checkbox" value="node"> Node</label>
-  <label><input type="checkbox" value="express"> Express</label>
-  <label><input type="checkbox" value="next"> Next.js</label>
-</div>
+<h4>Interests</h4>
+<label><input type="checkbox" value="ai"> AI</label>
+<label><input type="checkbox" value="web3"> Web3</label>
+<label><input type="checkbox" value="robotics"> Robotics</label>
+<label><input type="checkbox" value="hackathons"> Hackathons</label>
+<label><input type="checkbox" value="foss"> FOSS</label>
 
-<h3>Interests</h3>
-<div id="interests">
-  <label><input type="checkbox" value="ai"> AI</label>
-  <label><input type="checkbox" value="web3"> Web3</label>
-  <label><input type="checkbox" value="robotics"> Robotics</label>
-  <label><input type="checkbox" value="iot"> IoT</label>
-  <label><input type="checkbox" value="open-source"> Open Source</label>
-  <label><input type="checkbox" value="hackathons"> Hackathons</label>
-  <label><input type="checkbox" value="foss"> FOSS</label>
-</div>
-
-<br>
-
+<br><br>
 <button onclick="saveProfile()">Save Profile</button>
-<button onclick="findMatches()">Find Matched Peers</button>
+<button onclick="findMatches()">Find Matches</button>
 
 <h3>Matched Peers</h3>
 <div id="matches"></div>
 
+<script src="script.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-<script src="script.js"></script>
-
+</div>
 </body>
 </html>
