@@ -38,19 +38,30 @@ auth.onAuthStateChanged(user => {
 // ---------- PROFILE SAVE ----------
 function saveProfile() {
   const user = auth.currentUser;
-  if (!user) return alert("Login first");
+  if (!user) {
+    alert("Please login first");
+    return;
+  }
 
-  const skills = [...document.querySelectorAll(".skill:checked")].map(i => i.value);
-  const interests = [...document.querySelectorAll(".interest:checked")].map(i => i.value);
+  const skills = [...document.querySelectorAll(".skill:checked")]
+    .map(i => i.value);
+
+  const interests = [...document.querySelectorAll(".interest:checked")]
+    .map(i => i.value);
 
   db.collection("users").doc(user.uid).set({
     name: user.displayName,
+    email: user.email,
     skills,
     interests
   }).then(() => {
-    alert("Profile saved!");
+    alert("Profile saved successfully!");
+    console.log("Saved:", skills, interests);
+  }).catch(err => {
+    console.error("Error saving profile:", err);
   });
 }
+
 
 // ---------- LOAD PROFILE ----------
 function loadProfile(uid) {
