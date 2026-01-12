@@ -38,6 +38,7 @@ auth.onAuthStateChanged(user => {
 // ---------- PROFILE SAVE ----------
 function saveProfile() {
   const user = auth.currentUser;
+
   if (!user) {
     alert("Please login first");
     return;
@@ -49,18 +50,24 @@ function saveProfile() {
   const interests = [...document.querySelectorAll(".interest:checked")]
     .map(i => i.value);
 
+  console.log("Skills:", skills);
+  console.log("Interests:", interests);
+
   db.collection("users").doc(user.uid).set({
     name: user.displayName,
     email: user.email,
-    skills,
-    interests
-  }).then(() => {
+    skills: skills,
+    interests: interests
+  })
+  .then(() => {
     alert("Profile saved successfully!");
-    console.log("Saved:", skills, interests);
-  }).catch(err => {
-    console.error("Error saving profile:", err);
+  })
+  .catch(err => {
+    console.error("Error:", err);
+    alert("Failed to save profile");
   });
 }
+
 
 
 // ---------- LOAD PROFILE ----------

@@ -1,42 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Create Profile</title>
+  <title>Profile</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div class="container">
-<h2>Create Profile</h2>
 
+  <h2>Create Profile</h2>
 
-<h3>Skills</h3>
-<label><input type="checkbox" class="skill" value="java"> Java</label>
-<label><input type="checkbox" class="skill" value="python"> Python</label>
-<label><input type="checkbox" class="skill" value="c++"> C++</label>
-<label><input type="checkbox" class="skill" value="html"> HTML</label>
-<label><input type="checkbox" class="skill" value="css"> CSS</label>
-<label><input type="checkbox" class="skill" value="javascript"> JavaScript</label>
-<label><input type="checkbox" class="skill" value="react"> React</label>
-<label><input type="checkbox" class="skill" value="node"> Node</label>
+  <h3>Skills</h3>
+  <label><input type="checkbox" class="skill" value="java"> Java</label>
+  <label><input type="checkbox" class="skill" value="python"> Python</label>
+  <label><input type="checkbox" class="skill" value="react"> React</label>
+  <label><input type="checkbox" class="skill" value="node"> Node</label>
 
-<h3>Interests</h3>
-<label><input type="checkbox" class="interest" value="ai"> AI</label>
-<label><input type="checkbox" class="interest" value="web3"> Web3</label>
-<label><input type="checkbox" class="interest" value="robotics"> Robotics</label>
-<label><input type="checkbox" class="interest" value="hackathons"> Hackathons</label>
-<label><input type="checkbox" class="interest" value="foss"> FOSS</label>
+  <h3>Interests</h3>
+  <label><input type="checkbox" class="interest" value="ai"> AI</label>
+  <label><input type="checkbox" class="interest" value="hackathons"> Hackathons</label>
+  <label><input type="checkbox" class="interest" value="foss"> FOSS</label>
 
-<br><br>
-<button onclick="saveProfile()">Save Profile</button>
-<button onclick="findMatches()">Find Matches</button>
+  <br><br>
+  <button onclick="saveProfile()">Save Profile</button>
 
-<h3>Matched Peers</h3>
-<div id="matches"></div>
+  <h3>Matched Peers</h3>
+  <div id="matches"></div>
 
-<script src="script.js"></script>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-</div>
+<script src="script.js"></script>
+
 </body>
 </html>
