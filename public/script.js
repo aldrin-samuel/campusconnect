@@ -9,21 +9,34 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// LOGIN
+// ---------- LOGIN ----------
 function login() {
   const provider = new firebase.auth.GoogleAuthProvider();
-
   auth.signInWithPopup(provider).then(() => {
     window.location.href = "dashboard.html";
   });
 }
+
+// ---------- AUTH CHECK ----------
+auth.onAuthStateChanged(user => {
+  if (document.body.id === "dashboard") {
+    if (!user) {
+      window.location.href = "index.html";
+    } else {
+      document.getElementById("userName").innerText = "Welcome, " + user.displayName;
+      loadProfile(user.uid);
+      loadEvents();
+    }
+  }
+});
+
+// ---------- PROFILE SAVE ----------
 function saveProfile() {
   const user = auth.currentUser;
+  if (!user) return alert("Login first");
 
-  const skills = [...document.querySelectorAll("input[type=checkbox]:checked")]
-    .map(i => i.value);
-
-  const interests = skills; // you can separate later
+  const skills = [...document.querySelectorAll(".skill:checked")].map(i => i.value);
+  const interests = [...document.querySelectorAll(".interest:checked")].map(i => i.value);
 
   db.collection("users").doc(user.uid).set({
     name: user.displayName,
@@ -33,49 +46,8 @@ function saveProfile() {
     alert("Profile saved!");
   });
 }
-function matchUsers(mySkills, other) {
-  let score = 0;
 
-  mySkills.forEach(skill => {
-    if (other.skills.includes(skill)) score += 2;
-  });
-
-  return score;
-}
-const PASSCODE = "CLUB123";
-
-function addEvent() {
-  const code = prompt("Enter passcode");
-  if (code !== PASSCODE) return alert("Wrong code");
-
-  const name = document.getElementById("name").value;
-  const club = document.getElementById("club").value;
-  const date = document.getElementById("date").value;
-
-  db.collection("events").add({
-    name, club, date
-  }).then(() => {
-    alert("Event added!");
-  });
-}
-auth.onAuthStateChanged(user => {
-  if (!user) {
-    window.location.href = "index.html";
-  }
-});
-
-auth.onAuthStateChanged(user => {
-  if (!user) {
-    window.location.href = "index.html";
-  } else {
-    document.getElementById("userName").innerText =
-      "Welcome, " + user.displayName;
-
-    loadProfile(user.uid);
-    loadEvents();
-  }
-});
-
+// ---------- LOAD PROFILE ----------
 function loadProfile(uid) {
   db.collection("users").doc(uid).get().then(doc => {
     if (doc.exists) {
@@ -85,6 +57,53 @@ function loadProfile(uid) {
         <p><b>Interests:</b> ${data.interests.join(", ")}</p>
       `;
     }
+  });
+}
+
+// ---------- MATCH PEERS ----------
+function findMatches() {
+  const user = auth.currentUser;
+
+  db.collection("users").doc(user.uid).get().then(myDoc => {
+    const myData = myDoc.data();
+
+    db.collection("users").get().then(snapshot => {
+      let result = "";
+
+      snapshot.forEach(doc => {
+        if (doc.id !== user.uid) {
+          const other = doc.data();
+          let score = 0;
+
+          myData.skills.forEach(skill => {
+            if (other.skills.includes(skill)) score += 2;
+          });
+
+          if (score > 0) {
+            result += `<p><b>${other.name}</b> - Match Score: ${score}</p>`;
+          }
+        }
+      });
+
+      document.getElementById("matches").innerHTML = result || "No matches yet.";
+    });
+  });
+}
+
+// ---------- EVENTS ----------
+const PASSCODE = "CLUB123";
+
+function addEvent() {
+  const code = prompt("Enter club passcode");
+  if (code !== PASSCODE) return alert("Wrong code");
+
+  const name = document.getElementById("name").value;
+  const club = document.getElementById("club").value;
+  const date = document.getElementById("date").value;
+
+  db.collection("events").add({ name, club, date }).then(() => {
+    alert("Event added!");
+    loadEvents();
   });
 }
 
@@ -102,5 +121,15 @@ function loadEvents() {
       `;
     });
     document.getElementById("events").innerHTML = html;
+  });
+}
+
+// ---------- NAVIGATION ----------
+function goToProfile() { window.location.href = "profile.html"; }
+function goToEvents() { window.location.href = "events.html"; }
+
+function logout() {
+  auth.signOut().then(() => {
+    window.location.href = "index.html";
   });
 }

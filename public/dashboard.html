@@ -9,11 +9,11 @@
   <h2>Dashboard</h2>
   <p id="userName">Welcome!</p>
 
-  <h3>Your Profile</h3>
-  <div id="profile"></div>
-
-  <h3>Events</h3>
-  <div id="events"></div>
+  <div class="dashboard-buttons">
+    <button onclick="goToProfile()">My Profile</button>
+    <button onclick="goToEvents()">Events</button>
+    <button onclick="logout()">Logout</button>
+  </div>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
