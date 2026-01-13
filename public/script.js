@@ -1,7 +1,7 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyBGXmQilnigdNGZhVAjQhTDWjH2iBt4iC0",
-  authDomain: "campusconnect-70eba.firebaseapp.com",
-  projectId: "campusconnect-70eba"
+  apiKey: "api-key",
+  authDomain: "campus-connect",
+  projectId: "campusconnect"
 };
 
 firebase.initializeApp(firebaseConfig);
