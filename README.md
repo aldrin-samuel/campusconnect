@@ -47,6 +47,7 @@ Hosting: Firebase Hosting / GitHub Pages
 📁 Project Structure
 /public
   ├── index.html
+  
   ├── dashboard.html
   ├── network.html
   ├── events.html
