@@ -45,17 +45,27 @@ Database: Cloud Firestore
 Hosting: Firebase Hosting / GitHub Pages
 
 📁 Project Structure
+
 /public
+
   ├── index.html
   
   ├── dashboard.html
+  
   ├── network.html
+  
   ├── events.html
+  
   ├── addevent.html
+  
   ├── profile.html
+  
   ├── connections.html
+  
   ├── style.css
+  
   └── script.js
+  
   
 🔐 Authentication Rules
 Only college emails allowed
