@@ -6,44 +6,32 @@ A student collaboration platform with Firebase authentication and events.
 CampusConnect is a unified web platform designed to streamline campus communication, student networking, and event management. It replaces fragmented, unofficial systems with one trusted and official digital hub for students, clubs, and administrators.
 
 🚀 Features
-1. Secure Login
-Google Authentication
+  1. Secure Login
+    Google Authentication
+    Restricted to official college email IDs
+    Automatic user profile creation
 
-Restricted to official college email IDs
+  2. Student Networking
+    Discover students across departments and years
+    Send and manage connection requests
+    View accepted connections
+    Search by name, department, skills, or interests
 
-Automatic user profile creation
+  3. Profile Management
+    Auto-detect department & year from email
+    Add skills and interests
+    Personalized matchmaking system
 
-2. Student Networking
-Discover students across departments and years
+  4. Events Management
+    Club-restricted event creation
+    Add venue, date, time & registration links
+    View upcoming events
+    One-click event registration
 
-Send and manage connection requests
-
-View accepted connections
-
-Search by name, department, skills, or interests
-
-3. Profile Management
-Auto-detect department & year from email
-
-Add skills and interests
-
-Personalized matchmaking system
-
-4. Events Management
-Club-restricted event creation
-
-Add venue, date, time & registration links
-
-View upcoming events
-
-One-click event registration
-
-5. Requests & Connections
-Accept / Reject requests
-
-View current connections
-
-Build a campus network
+  5. Requests & Connections
+    Accept / Reject requests
+    View current connections
+    Build a campus network
 
 🛠️ Tech Stack
 Frontend: HTML, CSS, JavaScript
@@ -67,6 +55,7 @@ Hosting: Firebase Hosting / GitHub Pages
   ├── connections.html
   ├── style.css
   └── script.js
+  
 🔐 Authentication Rules
 Only college emails allowed
 
