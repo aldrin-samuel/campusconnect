@@ -1,3 +1,4 @@
+/* General Reset */
 * {
   margin: 0;
   padding: 0;
@@ -7,149 +8,34 @@
 
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  /* Deep Radial Gradient - Consistent background */
+  background: radial-gradient(circle at center, #2e1a47 0%, #120c24 100%);
   color: #fff;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; /* Centers the main container vertically */
+  padding: 40px 0;
 }
 
-.container {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 900px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  backdrop-filter: blur(10px);
-}
-
-h2, h3, h4 {
-  margin-bottom: 15px;
-  color: #fff;
-}
-
-p {
-  margin-bottom: 10px;
-  color: #e0e0e0;
-}
-
-button {
-  background: linear-gradient(135deg, #00f2fe, #4facfe);
-  border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-  margin: 5px 0;
-}
-
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  margin-bottom: 10px;
-  outline: none;
-}
-
-label {
-  display: inline-block;
-  margin: 5px 10px 5px 0;
-  background: rgba(255,255,255,0.15);
-  padding: 6px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-label input {
-  margin-right: 5px;
-}
-
-.event {
-  background: rgba(255,255,255,0.15);
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  transition: 0.3s;
-}
-
-.event:hover {
-  background: rgba(255,255,255,0.25);
-}
-
-.nav-buttons {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.profile-card {
-  background: rgba(255,255,255,0.15);
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-}
-.navbar {
-  background: linear-gradient(90deg, #6a11cb, #2575fc);
-  padding: 12px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  margin-left: 15px;
-  font-weight: 500;
-}
-
-.nav-links a:hover {
-  text-decoration: underline;
-}
-.small-btn {
-  padding: 8px 14px;
-  font-size: 14px;
-  background: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.navbar {
+/* Navbar (Fixed) */
+#navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 1000;
+}
+
+/* Reuse the same navbar style */
+.navbar {
   height: 60px;
   background: linear-gradient(90deg, #6a11cb, #2575fc);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 40px;
   color: white;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.nav-left {
-  font-size: 20px;
-  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .nav-right a {
@@ -159,118 +45,314 @@ label input {
   font-weight: 500;
 }
 
-.nav-right a:hover {
-  text-decoration: underline;
+/* Main Content Container (Glassmorphism) */
+.container, .login-card {
+  background: rgba(255, 255, 255, 0.08); /* Transparent White */
+  padding: 40px 50px;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 1100px; /* Increased width to fit grid cards */
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+  text-align: left;
+  margin-top: 60px; /* Space for fixed navbar */
 }
 
-/* Push page content below navbar */
-.container {
-  margin-top: 80px;
-}
+h2 { font-size: 2rem; margin-bottom: 10px; font-weight: 600; }
+h3 { margin-top: 30px; margin-bottom: 15px; color: #b0a8c9; font-weight: 500; }
+
+/* Dropdown Styling */
 .dropdown {
   position: relative;
   display: inline-block;
+  width: 100%;
+  max-width: 300px;
+  margin-right: 20px;
+  margin-bottom: 10px;
 }
 
-.dropbtn {
-  background: #5b6cff;
-  color: white;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #2b2f5c;
-  min-width: 220px;
-  padding: 10px;
-  border-radius: 8px;
-  z-index: 1;
-}
-
-.dropdown-content label {
-  display: block;
-  color: white;
-  margin: 5px 0;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-/* Dropdown Container */
-.dropdown {
-  position: relative;
-  display: inline-block;
-  width: 250px;
-  margin-bottom: 20px;
-}
-
-/* Button */
 .dropbtn {
   width: 100%;
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
-  padding: 12px 16px;
+  padding: 12px 20px;
   font-size: 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   text-align: left;
   transition: 0.3s;
 }
 
-.dropbtn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-
-/* Dropdown Content */
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #ca25c4;
+  top: 105%;
+  left: 0;
+  background-color: rgba(30, 25, 50, 0.95);
   width: 100%;
-  max-height: 220px;
+  max-height: 300px;
   overflow-y: auto;
-  border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   z-index: 10;
-  padding: 10px;
-  animation: fadeIn 0.2s ease-in-out;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Show on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+.dropdown:hover .dropdown-content { display: block; }
 
-/* Checkbox Labels */
 .dropdown-content label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  font-size: 14px;
+  justify-content: center; /* Centered text inside dropdown */
+  padding: 10px;
+  margin: 4px 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 6px;
   transition: 0.2s;
 }
 
-.dropdown-content label:hover {
-  background-color: #6e0d65;
+.dropdown-content input[type="checkbox"] {
+  position: absolute; opacity: 0; width: 0; height: 0; /* Hidden Checkbox */
 }
 
-/* Custom Checkbox */
-.dropdown-content input[type="checkbox"] {
-  accent-color: #667eea;
+/* Active Selection State */
+.dropdown-content label:has(input:checked) {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: white;
+  font-weight: bold;
+}
+
+/* Buttons */
+button:not(.dropbtn) {
+  background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,210,255,0.3); }
+
+/* --- MATCHED PEERS GRID SECTION --- */
+#matches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive Grid */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Style for the cards generated by JS */
+.profile-card, #matches > div {
+  background: rgba(255, 255, 255, 0.08); /* Glass effect */
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  
+  /* Text Alignment: Left (as requested) */
+  text-align: left; 
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-card:hover, #matches > div:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-5px);
+}
+
+.profile-card h4, #matches > div h4, #matches > div strong {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.profile-card p, #matches > div p {
+  color: #d1d5db;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Decorative Star */
+.corner-star {
+  position: fixed;
+  bottom: 40px;
+  right: 60px;
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  /* Deep Radial Gradient - Matching the reference background */
+  background: radial-gradient(circle at center, #2e1a47 0%, #11091d 100%);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-container {
+  margin-bottom: 40px;
+}
+
+.cc-logo {
+  width: 110px; /* Adjust size to match reference image */
+  height: auto;
+}
+
+/* Wide Login Card with Glassmorphism */
+.login-card {
+  background: rgba(255, 255, 255, 0.06); /* Subtle transparency */
+  padding: 60px 80px; /* Generous padding for a wide look */
+  border-radius: 30px;
+  width: 90%;
+  max-width: 950px; /* Set a large max-width to make it wide */
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+}
+
+.card-content {
+  text-align: left; /* Aligns all text and button to the left */
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+p {
+  color: #b0a8c9;
+  font-size: 1rem;
+  margin-bottom: 40px;
+  opacity: 0.8;
+}
+
+/* Small, Left-Aligned Google Button */
+.google-btn {
+  background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 10px;
+  color: #000; /* Black text as seen in reference */
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+}
+
+.google-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 210, 255, 0.4);
+}
+/* EVENTS CONTAINER */
+.event {
+  margin-bottom: 24px;
+  padding: 18px;
+}
+
+/* EVENT CARD */
+.event {
+  background: linear-gradient(135deg, #6a5cff, #8b7cff);
+  color: white;
+  padding: 18px 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+/* TEXT STYLING */
+.event h4 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.event p {
+  margin: 4px 0;
+  font-size: 14px;
+  opacity: 0.9;
+  color: #E5E7FF;
+}
+
+/* ADD EVENT BUTTON */
+.small-btn {
+  background: #5b4dff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.small-btn:hover {
+  background: #4638ff;
+}
+
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.user-card {
+  background: #7a6cff;
+  color: white;
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.user-card button {
+  background: white;
+  color: #5a4bff;
+  border: none;
+  padding: 20px 30px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-/* Animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
+.profile-card {
+  background: rgba(255,255,255,0.15);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;   /* SPACE BETWEEN USERS */
+}
+.event {
+  cursor: pointer;
 }

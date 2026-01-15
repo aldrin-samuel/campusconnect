@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Profile</title>
+  <title>Profile | CampusConnect</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,25 +12,35 @@
 <div class="container">
   <h2>Create Profile</h2>
 
-  
-
-  <!-- Skills -->
   <h3>Skills</h3>
   <div class="dropdown">
     <button class="dropbtn">Select Skills</button>
     <div class="dropdown-content">
+      
+      <label><input type="checkbox" class="skill" value="c"> C</label>
+      <label><input type="checkbox" class="skill" value="c++"> C++</label>
       <label><input type="checkbox" class="skill" value="java"> Java</label>
       <label><input type="checkbox" class="skill" value="python"> Python</label>
-      <label><input type="checkbox" class="skill" value="c++"> C++</label>
+      <label><input type="checkbox" class="skill" value="js"> JavaScript</label>
       <label><input type="checkbox" class="skill" value="html"> HTML</label>
       <label><input type="checkbox" class="skill" value="css"> CSS</label>
-      <label><input type="checkbox" class="skill" value="javascript"> JavaScript</label>
       <label><input type="checkbox" class="skill" value="react"> React</label>
-      <label><input type="checkbox" class="skill" value="node"> Node</label>
+      <label><input type="checkbox" class="skill" value="node"> Node.js</label>
+      <label><input type="checkbox" class="skill" value="firebase"> Firebase</label>
+      <label><input type="checkbox" class="skill" value="mysql"> MySQL</label>
+      <label><input type="checkbox" class="skill" value="mongodb"> MongoDB</label>
+      <label><input type="checkbox" class="skill" value="git"> Git</label>
+      <label><input type="checkbox" class="skill" value="linux"> Linux</label>
+      <label><input type="checkbox" class="skill" value="uiux"> UI/UX</label>
+      <label><input type="checkbox" class="skill" value="flutter"> Flutter</label>
+      <label><input type="checkbox" class="skill" value="kotlin"> Kotlin</label>
+      <label><input type="checkbox" class="skill" value="api"> REST APIs</label>
+      <label><input type="checkbox" class="skill" value="figma"> Figma</label>
+      <label><input type="checkbox" class="skill" value="django"> Django</label>
+
     </div>
   </div>
 
-  <!-- Interests -->
   <h3>Interests</h3>
   <div class="dropdown">
     <button class="dropbtn">Select Interests</button>
@@ -37,20 +48,42 @@
       <label><input type="checkbox" class="interest" value="ai"> AI</label>
       <label><input type="checkbox" class="interest" value="web3"> Web3</label>
       <label><input type="checkbox" class="interest" value="robotics"> Robotics</label>
-      <label><input type="checkbox" class="interest" value="iot"> IoT</label>
-      <label><input type="checkbox" class="interest" value="opensource"> Open Source</label>
-      <label><input type="checkbox" class="interest" value="hackathons"> Hackathons</label>
+      <label><input type="checkbox" class="interest" value="game_devolopment"> Game Devolopment</label>
+      <label><input type="checkbox" class="interest" value="iot"> IOT</label>
+      <label><input type="checkbox" class="interest" value="embedded_systems"> Embedded Systems</label>
+      <label><input type="checkbox" class="interest" value="vlsi"> VLSI</label>
+      <label><input type="checkbox" class="interest" value="hackthons"> Hackthons</label>
+      <label><input type="checkbox" class="interest" value="open_source"> Open Source</label>
       <label><input type="checkbox" class="interest" value="foss"> FOSS</label>
+      <label><input type="checkbox" class="interest" value="startup"> Startup</label>
+      <label><input type="checkbox" class="interest" value="ml"> Machine Learning</label>
+      <label><input type="checkbox" class="interest" value="web"> Web Development</label>
+      <label><input type="checkbox" class="interest" value="app"> App Development</label>
+      <label><input type="checkbox" class="interest" value="competitive_programming"> Competitive Programming</label>
+      <label><input type="checkbox" class="interest" value="design"> UI/UX Design</label>
+      <label><input type="checkbox" class="interest" value="cyber"> Cyber Security</label>
+      <label><input type="checkbox" class="interest" value="cloud"> Cloud Computing</label>
+      <label><input type="checkbox" class="interest" value="blockchain"> Blockchain</label>
+      <label><input type="checkbox" class="interest" value="datasci"> Data Science</label>
+      <label><input type="checkbox" class="interest" value="research"> Research</label>
+      <label><input type="checkbox" class="interest" value="hardware"> Hardware Projects</label>
+      <label><input type="checkbox" class="interest" value="automation"> Automation</label>
+      <label><input type="checkbox" class="interest" value="technews"> Tech News</label>
+      
+
     </div>
   </div>
 
-  <br><br>
-  <button onclick="saveProfile()">Save Profile</button>
-  <button onclick="findMatches()">Find Matches</button>
+  <div style="margin-top: 20px;">
+    <button onclick="saveProfile()">Save Profile</button>
+    <button onclick="findMatches()">Find Matches</button>
+  </div>
 
-  <h3>Matched Peers</h3>
+  <h3>Matched Peers with Similar Skills & Interests</h3>
   <div id="matches"></div>
 </div>
+
+
 
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
@@ -58,6 +91,7 @@
 <script src="script.js"></script>
 
 <script>
+  // Dynamic Navbar Loading
   fetch("navbar.html")
     .then(res => res.text())
     .then(data => {
