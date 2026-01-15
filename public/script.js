@@ -1,5 +1,5 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyDxhZxUBWBH6FoujyXNU4XsQ8iSQ6T-Y2g",
+  apiKey: "api-key",
   authDomain: "campusconnect-70eba.firebaseapp.com",
   projectId: "campusconnect-70eba"
 };
