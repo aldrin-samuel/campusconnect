@@ -91,26 +91,45 @@ Connections
 Requests
 
 📊 Firestore Collections
+
 Users
+
 {
   "name": "John",
+  
   "email": "john.cse2025@college.edu",
+  
   "department": "CSE",
+  
   "year": 2,
+  
   "skills": ["Java", "UI/UX"],
+  
   "interests": ["AI", "Robotics"],
+  
   "connections": [],
+  
   "requests": []
+  
 }
+
 Events
+
 {
   "name": "Tech Fest",
+  
   "club": "CSI",
+  
   "venue": "Seminar Hall A",
+  
   "time": "10:00",
+  
   "date": "2026-02-10",
+  
   "link": "https://forms.gle/..."
+  
 }
+
 🔎 Search System
 Users can search by:
 
