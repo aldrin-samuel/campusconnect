@@ -63,7 +63,8 @@ auth.onAuthStateChanged(user => {
   if (document.getElementById("events")) loadEvents();
   if (document.querySelector(".skill")) loadProfileData();
   if (document.getElementById("requests")) loadRequests();
-  if (document.getElementById("users")) loadUsers();
+  if (document.getElementById("networkList")) loadNetwork();
+
   if (document.getElementById("connections")) loadConnections();
 
   const nameEl = document.getElementById("userName");
@@ -165,9 +166,11 @@ function addEvent() {
   const name = document.getElementById("name").value;
   const club = document.getElementById("club").value;
   const date = document.getElementById("date").value;
-  const link = document.getElementById("eventLink").value; // ✅ FIXED
+  const time = document.getElementById("time").value;
+  const venue = document.getElementById("venue").value;
+  const link = document.getElementById("eventLink").value;
 
-  if (!name || !club || !date || !link) {
+  if (!name || !club || !date || !time || !venue || !link) {
     alert("Please fill all fields!");
     return;
   }
@@ -175,6 +178,8 @@ function addEvent() {
   db.collection("events").add({
     name,
     club,
+    venue,
+    time,
     date,
     link
   }).then(() => {
@@ -185,6 +190,7 @@ function addEvent() {
     alert("Error adding event");
   });
 }
+
 
 
 
@@ -200,12 +206,15 @@ function loadEvents() {
         const e = doc.data();
 
         html += `
-          <div class="event" onclick="openEvent('${e.link}')">
-            <h4>${e.name}</h4>
-            <p>Club: ${e.club}</p>
-            <p>Date: ${e.date}</p>
-          </div>
-        `;
+  <div class="event" onclick="openEvent('${e.link}')">
+    <h4>${e.name}</h4>
+    <p>Club: ${e.club}</p>
+    <p>Date: ${e.date}</p>
+    <p>Time: ${e.time}</p>
+    <p>Venue: ${e.venue}</p>
+  </div>
+`;
+
       });
 
       document.getElementById("events").innerHTML =
@@ -238,22 +247,24 @@ function logout() {
   });
 }
 function extractDetailsFromEmail(email) {
-  const main = email.split("@")[0];      // aldrin.cse2025
+  const main = email.split("@")[0];      // e.g. aldrin.cse2025
   const parts = main.split(".");         // ["aldrin", "cse2025"]
 
   if (parts.length < 2) return null;
 
-  const depYear = parts[1];              // cse2025
-  const dept = depYear.slice(0, 3);      // cse
-  const admissionYear = parseInt(depYear.slice(3)); // 2025
+  const depYear = parts[1];              // cse2025, it2024, mech2023
+
+  // 🔹 Extract letters (department)
+  const dept = depYear.match(/[a-zA-Z]+/)[0];
+
+  // 🔹 Extract numbers (admission year)
+  const admissionYear = parseInt(depYear.match(/\d+/)[0]);
 
   const now = new Date();
   const year = now.getFullYear();
-  const month = now.getMonth() + 1; // 1 = Jan
+  const month = now.getMonth() + 1;
 
-  // Academic year starts in July
   const academicYear = (month >= 7) ? year : year - 1;
-
   const studyYear = academicYear - admissionYear + 1;
 
   return {
@@ -261,6 +272,7 @@ function extractDetailsFromEmail(email) {
     year: studyYear
   };
 }
+
 
 function getStudentYear(admissionYear) {
   const now = new Date();
@@ -409,36 +421,47 @@ function loadConnections() {
 
 function loadNetwork() {
   const user = auth.currentUser;
+  if (!user) return;
+
+  const search = document.getElementById("searchInput")?.value.toLowerCase() || "";
 
   db.collection("users").doc(user.uid).get().then(myDoc => {
-    const myData = myDoc.data();
+    const myData = myDoc.data() || {};
     const myConnections = myData.connections || [];
 
     db.collection("users").get().then(snapshot => {
       let html = "";
 
       snapshot.forEach(doc => {
-        if (doc.id !== user.uid && !myConnections.includes(doc.id)) {
-          const u = doc.data();
+        if (doc.id === user.uid) return;
+        if (myConnections.includes(doc.id)) return;
 
-          html += `
-            <div class="profile-card">
-              <b>${u.name}</b><br>
-              Dept: ${u.department}<br>
-              Year: ${u.year}<br>
-              Skills: ${u.skills.join(", ")}<br>
-              Interests: ${u.interests.join(", ")}<br>
-              <button onclick="sendRequest('${doc.id}')">Connect</button>
-            </div>
-          `;
-        }
+        const u = doc.data();
+
+        const text =
+          `${u.name} ${u.department} ${u.year} ${(u.skills || []).join(" ")} ${(u.interests || []).join(" ")}`.toLowerCase();
+
+        if (!text.includes(search)) return;
+
+        html += `
+          <div class="profile-card">
+            <b>${u.name}</b><br>
+            Dept: ${u.department}<br>
+            Year: ${u.year}<br>
+            Skills: ${(u.skills || []).join(", ")}<br>
+            Interests: ${(u.interests || []).join(", ")}<br>
+            <button onclick="sendRequest('${doc.id}')">Connect</button>
+          </div>
+        `;
       });
 
       document.getElementById("networkList").innerHTML =
-        html || "No new students found.";
+        html || "No students match your search.";
     });
   });
 }
+
+
 function loadRequests() {
   const user = auth.currentUser;
   if (!user) return;

@@ -18,7 +18,17 @@
   <div id="requests">Loading...</div>
 
   <h3>Discover Students</h3>
-  <div id="users">Loading...</div>
+
+  <!-- 🔍 Search Bar -->
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="Search by name, dept, skill, interest..." 
+    style="width:100%; padding:10px; margin-bottom:15px;"
+    oninput="loadNetwork()"
+  >
+
+  <div id="networkList">Loading...</div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>

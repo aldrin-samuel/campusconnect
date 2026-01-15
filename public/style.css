@@ -356,3 +356,22 @@ p {
 .event {
   cursor: pointer;
 }
+#searchInput {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+  margin-bottom: 15px;
+}
+
+#searchInput:focus {
+  border-color: #4f46e5;   /* nice blue */
+  box-shadow: 0 0 5px rgba(79, 70, 229, 0.3);
+}
+
+#searchInput::placeholder {
+  color: #999;
+}
