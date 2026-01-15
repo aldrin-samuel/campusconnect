@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <script>
   if (sessionStorage.getItem("eventAuth") !== "true") {
     alert("Access denied!");
@@ -14,15 +15,15 @@
 
 <div id="navbar"></div>
 
-<div class="container">
-  <h2>Add Event</h2>
+<div class="add-event-container">
+  <h2>Add New Event</h2>
 
   <input id="name" placeholder="Event Name">
-  <input id="club" placeholder="Club">
+  <input id="club" placeholder="Club / Organizer">
   <input id="venue" placeholder="Venue (e.g. Seminar Hall A)">
   <input id="time" type="time">
   <input id="date" type="date">
-  <input id="eventLink" placeholder="Event Link (https://...)" required>
+  <input id="eventLink" placeholder="Event Link (https://...)">
 
   <button onclick="addEvent()">Add Event</button>
 </div>

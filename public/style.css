@@ -375,3 +375,54 @@ p {
 #searchInput::placeholder {
   color: #999;
 }
+body {
+  font-family: Arial, sans-serif;
+  
+  margin: 0;
+  padding: 0;
+}
+
+.add-event-container {
+  width: 400px;
+  margin: 60px auto;
+  
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.add-event-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.add-event-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.add-event-container input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.add-event-container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #007bff;
+  
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-event-container button:hover {
+  background: #0056b3;
+}
